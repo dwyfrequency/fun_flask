@@ -2,13 +2,15 @@ from flask import Flask, render_template
 
 app = Flask(__name__)
 
+"""Below, mapping two dif urls to the same function,
+if the base url is called they will be prompted to login,
+else render more detailed info"""
 @app.route('/')
-def hello():
-	return 'Hello World'
+@app.route('/<user>')
+def hello(user = None):
+	return render_template("user.html", user=user)
 
-@app.route('/profile/<name>')
-def profile(name):
-	return render_template("profile.html", name=name)
+
 
 if __name__ == '__main__':
 	app.run(port=5000,debug=True)
